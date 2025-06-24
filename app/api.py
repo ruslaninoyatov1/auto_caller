@@ -1,16 +1,19 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from typing import List
 from app.schemas import ClientData
-import datetime
+from app.utils import log_call_request
 
 router = APIRouter()
 
 @router.post("/call-debtors")
 async def call_debtors(clients: List[ClientData]):
-    # Hozircha log qilamiz, keyinchalik bazaga yoki queuega yuboramiz
+    if not clients:
+        raise HTTPException(status_code=400, detail="Bo'sh ro'yxat yuborildi.")
+
     for client in clients:
-        print(f"[{datetime.datetime.now()}] Kelgan: {client.client_name}, {client.phone_number}, qarz: {client.debt}")
-    
+        log_call_request(client)
+        print(f"[CALL LOG] {client.client_name} ga avtomatik ogohlantirish jo'natildi.")
+
     return {
         "status": "success",
         "calls_scheduled": len(clients)

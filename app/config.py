@@ -1,0 +1,2 @@
+API_KEY = "3dc0f8d4-739a-4b31-921f-123456abcdef" 
+API_KEY_NAME = "x-api-key"

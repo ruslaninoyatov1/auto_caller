@@ -1,9 +1,6 @@
 from fastapi import FastAPI
-from app.api import router
+from routes import debtors
 
-app = FastAPI(
-    title="Auto Caller API",
-    version="1.0.0",
-)
+app = FastAPI()
 
-app.include_router(router, prefix="/api/v1")
+app.include_router(debtors.router)
