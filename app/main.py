@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Depends, HTTPException
 from typing import List
-from auth import verify_api_key
-from schemas import ClientData
-from models import CallLog
-from database import Base, engine, get_db
+from app.auth import verify_api_key
+from app.schemas import ClientData
+from app.models import CallLog
+from app.database import Base, engine, get_db
 from sqlalchemy.orm import Session
 
 app = FastAPI()
